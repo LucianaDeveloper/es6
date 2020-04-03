@@ -1,0 +1,87 @@
+ES6-
+A mesma sintaxe mas com novas funcionalidades a cada versão lançada.
+Babel - Pega o codigo com novas funcionalidades e converte em um código para que os navegadores entendam. Ele reescreve o código de uma forma que o navegador entenda.
+Novas formas de escrever o JavaScript.
+webpack - live reload, quando necessário ativa o babel para que o navegador entenda
+rest/spread- formas de manipular propriedades e infos dentro de propriedades e arrays
+async await - nova forma de trabalhar com programação assyncrona dentro do JS. Promises, axios para fazer requisições a api, vai dar uma forma de trabalhar com essas requisições a api de formas menos verbosas.
+--------------
+const- não tem seu valor reatribuído. Não podemos reatribuir um valor a uma variavel mas podemos mutar:
+const usuario = {nome: "Diego"};
+
+usuario.nome = "Cleiton";
+
+console.log(usuario);
+
+No meu console vai aparecer Cleiton. Isso seria mutar uma info. Isso é mutação. Quando trabalhamos com o mesmo formato do objeto, com as mesmas informações mas, alteramos valores dentro do objeto.
+--------------
+let- keyword que vamos usar nas variaveis de escopo
+var- genérico/abrangente?
+
+package.json ->
+"devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/preset-env": "^7.6.3"
+  },
+essas dependencias eu só vou usar enquanto eu estiver no meu ambiente de desenvolvimento e não no ambiente de produção quando minha aplicação estiver rodando online porque lá o babel não vai poder fazer nada, ele só vai gerar o bundle.js e para online a gente só vai jogar o bundle.js e não todo o código da nossa aplicação.
+
+Depois que instalo meu babel loader eu mudou meu script de:
+"scripts": {
+    "dev": "babel ./main.js -o ./bundle.js -w"
+  }
+
+Para:
+
+"scripts": {
+    "dev": "webpack --mode=development -w"
+  }
+
+assim ele executa o webpack em modo de desenvolvimento.
+
+***
+webpack dev server - serve pra trabalhar com nosso projeto em modo offline, monitorando alterações no meu src e dando um refresh na minha pagina para que eu possa ver minhas alterações em tela.
+src - armazenar todo codigo JS que vamos utilizar na nossas aplicação
+public - todos os arquivos que nao vou trabalhar diretamente com a parte do webpack
+No src vai ficar todos os arquivos que o webpack precisa monitorar as mudanças, enquanto que no public vai ficar nossos arquivos que não precisam ser monitorados no webpack.
+deletei meu bundle para configurar o novo bundle com webpack server
+e quando configuro essa parte, no meu package.json meu script muda para:
+"scripts": {
+    "dev": "webpack-dev-server --mode=development"
+	//"build": "webpack --mode=production" // e dar um yarn build no terminal, isso caso meu arquivo bundle nao aparecer no na minha pasta quando eu fizer as config.
+  }
+quando eu der meu yarn dev aqui ele vai falar o endereço e porta ao qual eu posso acompanhar as infos (http://localhost:8080/). Vai estar live reload habilitado.
+
+*****
+Async/Await
+Uma forma de trabalhar com programação assíncrona dentro do JS. 
+Promisses são formas de realizar ações de forma assíncrona e são muito utilizadas para fazer requisições a api, servidores back-end e assim por diante. Posso criar promisses de forma manual dentro do meu JS
+ Para trabalhar como minha promise preciso de uma biblioteca instalada, e adc um novo plugin no nosso .babelrc
+**
+Axios
+O uso dessa biblioteca nos dá acesso a uma api para trabalhar com requisições assincronas a protocolos http, outras apis com servidores backend, vamos acessar a api do git hub, utilizando axios.
+
+
+************************************************************
+comandos
+************************************************************
+após criar pasta:
+yarn init -y -> e dar enter em tudo até ele criar o package.json
+yarn add @babel/cli -> permitir a interface de linha de comando do babel (igual o yarn)
+yarn add @babel/preset-env -> vai adc as dependencias do meu projeto
+crio no vsc o.gitignore para o git não subir meus arquivos pois pode ser mto pesado. Crio o .babelrc porque ele vai ser responsavel por intermediar meu codigo no browser para que ele funcione em todos navegadores.
+Package.json:
+"scripts": { /* Formas de permitir executar determinados comandos no meu terminal*/
+Após isso no terminal:
+yarn dev
+yarn add @babel/core
+yarn add @babel/plugin-proposal-object-rest-spread -> passar no meu .babelrc meu plugin
+yarn add webpack -D
+yarn add webpack-cli -D ->Um serviço que vai nos disponibilizar uma forma de trabalhar com vários arquivos JS na nossa aplicação. O -D é porque ele vai passar para meu devDependencies
+yarn add webpack-dev-server -D - instalando como dependencia de desenvolvimento
+yarn add babel-loader -D
+yarn add @babel/plugin-transform-async-to-generator -D - pra poder trabalhar com minhas promises
+yarn add @babel/polyfill -D -> que tb vai trazer outras funcionalidades pro nosso babel
+yarn add axios - para poder trabalhar com requisições assincronas a alguma api (como não é uma dependencia de desenvolvimento eu nao vou adc o D ao final)
+yarn add axios -> (t.vsc)  para puxar minha api/fazer requisições http

@@ -1,0 +1,7 @@
+{
+  "presets": ["@babel/preset-env"], /* Vai enteder o mabiente que estou trabalhando meu projeto (no meu caso o browser), e entendo ele vai "traduzir"/converter isso para meu navegador */
+  "plugins": [
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-async-to-generator"
+  ]
+}
